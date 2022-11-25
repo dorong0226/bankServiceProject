@@ -2,26 +2,26 @@ package org.example;
 
 public class Bill {
 
-    // ( ìš”êµ¬ì‚¬í•­ 10 ) ê³„ì¢Œì˜ ê±°ëž˜ ë‚´ì—­ì€ ê±°ëž˜ ì¼ìž, ê±°ëž˜ ì‹œê°„, ê³„ì¢Œë²ˆí˜¸, ìž…ê¸ˆ/ì¶œê¸ˆ ì—¬ë¶€, ê±°ëž˜ ê¸ˆì•¡, ì€í–‰ ëª…ìœ¼ë¡œ êµ¬ì„±ëœë‹¤.
-    private String dealDate;   // ê±°ëž˜ ì¼ìž <- ì‹œìŠ¤í…œì—ì„œ í•˜ë¯„ ë¨ ( íŒŒë¼ë¯¸í„°ë¡œ ë°›ì„í•„ìš” x )
-    private String dealTime;   // ê±°ëž˜ ì‹œê°„ <- ì‹œìŠ¤í…œì—ì„œ í•˜ë¯„ ë¨ ( íŒŒë¼ë¯¸í„°ë¡œ ë°›ì„í•„ìš” x )
-    private String accountNum; // ê³„ì¢Œ ë²ˆí˜¸ <- Account ì˜ deposit / withdrawì—ì„œ ë„˜ê²¨ì¤˜ì•¼í•¨. ë©”ì‹œì§€ë¡œ
-    private String depositOrWithdraw;  // ìž…ê¸ˆ/ì¶œê¸ˆ ì—¬ë¶€ <- deposit / withdrawì—ì„œ ë°›ìŒ.
-    private int dealAmount;    // ê±°ëž˜ ê¸ˆì•¡ <- Accountì˜ deposit/withdrawì—ì„œ ë„˜ê²¨ì¤Œ
-    private String bankName;   // ì€í–‰ ì´ë¦„ : ë¥´íƒ„ ì€í–‰ìœ¼ë¡œ ê³ ì •
+    // ( ¿ä±¸»çÇ× 10 ) °èÁÂÀÇ °Å·¡ ³»¿ªÀº °Å·¡ ÀÏÀÚ, °Å·¡ ½Ã°£, °èÁÂ¹øÈ£, ÀÔ±Ý/Ãâ±Ý ¿©ºÎ, °Å·¡ ±Ý¾×, ÀºÇà ¸íÀ¸·Î ±¸¼ºµÈ´Ù.
+    private String dealDate;   // °Å·¡ ÀÏÀÚ <- ½Ã½ºÅÛ¿¡¼­ ÇÏ¹È µÊ ( ÆÄ¶ó¹ÌÅÍ·Î ¹ÞÀ»ÇÊ¿ä x )
+    private String dealTime;   // °Å·¡ ½Ã°£ <- ½Ã½ºÅÛ¿¡¼­ ÇÏ¹È µÊ ( ÆÄ¶ó¹ÌÅÍ·Î ¹ÞÀ»ÇÊ¿ä x )
+    private String accountNum; // °èÁÂ ¹øÈ£ <- Account ÀÇ deposit / withdraw¿¡¼­ ³Ñ°ÜÁà¾ßÇÔ. ¸Þ½ÃÁö·Î
+    private String depositOrWithdraw;  // ÀÔ±Ý/Ãâ±Ý ¿©ºÎ <- deposit / withdraw¿¡¼­ ¹ÞÀ½.
+    private int dealAmount;    // °Å·¡ ±Ý¾× <- AccountÀÇ deposit/withdraw¿¡¼­ ³Ñ°ÜÁÜ
+    private String bankName;   // ÀºÇà ÀÌ¸§ : ¸£Åº ÀºÇàÀ¸·Î °íÁ¤
 
 
     // Constructor
     Bill(String accountNum, String depositOrWithdraw, int dealAmount ){
         this.accountNum = accountNum;
-        this.depositOrWithdraw = depositOrWithdraw; // "ìž…ê¸ˆ", "ì¶œê¸ˆ"ë§Œ ê°€ëŠ¥.
+        this.depositOrWithdraw = depositOrWithdraw; // "ÀÔ±Ý", "Ãâ±Ý"¸¸ °¡´É.
         this.dealAmount = dealAmount;
 
-        // dealDate ì´ˆê¸°í™” ë¡œì§ ( í˜„ìž¬ ì‹œê°„ ë©”ëª¨ìž¥ ì„œë¹„ìŠ¤ì—ì„œ LocalDate ì‚¬ìš©í•œê±°ì²˜ëŸ¼ )
+        // dealDate ÃÊ±âÈ­ ·ÎÁ÷ ( ÇöÀç ½Ã°£ ¸Þ¸ðÀå ¼­ºñ½º¿¡¼­ LocalDate »ç¿ëÇÑ°ÅÃ³·³ )
 
-        // dealTime ì´ˆê¸°í™” ë¡œì§
+        // dealTime ÃÊ±âÈ­ ·ÎÁ÷
 
-        this.bankName = "ë¥´íƒ„";  // ìš°ë¦¬ ì„¸ê³„ì—ì„œëŠ” ë¥´íƒ„ ì€í–‰ë§Œ ìžˆìŠµë‹ˆë‹¤.
+        this.bankName = "¸£Åº";  // ¿ì¸® ¼¼°è¿¡¼­´Â ¸£Åº ÀºÇà¸¸ ÀÖ½À´Ï´Ù.
     }
 
 

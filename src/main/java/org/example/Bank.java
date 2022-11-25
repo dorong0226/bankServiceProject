@@ -1,6 +1,6 @@
 package org.example;
 
-import java.util.ArrayList;
+import java.util.Random;
 
 public class Bank {
     private AccountRepository accountRepository;
@@ -8,48 +8,45 @@ public class Bank {
 
     Bank() {
         accountRepository = new AccountRepository();
-        bankName = "ë¥´íƒ„";   // ìš°ë¦¬ ì„¸ê³„ì—ì„œëŠ” ë¥´íƒ„ì€í–‰ë§Œ ìˆìŠµë‹ˆë‹¤.
+        bankName = "¸£Åº";   // ¿ì¸® ¼¼°è¿¡¼­´Â ¸£ÅºÀºÇà¸¸ ÀÖ½À´Ï´Ù.
     }
 
-    // ( ìš”êµ¬ì‚¬í•­ 1 ) ì€í–‰ì€ ê³„ì¢Œë¥¼ ë“±ë¡í•œë‹¤ ( ë‹¨, ê³„ì¢Œë²ˆí˜¸ëŠ” ì •ê·œ í‘œí˜„ì‹ìœ¼ë¡œ ì œí•œ )
+    // ( ¿ä±¸»çÇ× 1 ) ÀºÇàÀº °èÁÂ¸¦ µî·ÏÇÑ´Ù ( ´Ü, °èÁÂ¹øÈ£´Â Á¤±Ô Ç¥Çö½ÄÀ¸·Î Á¦ÇÑ )
     public void registerAccount(String ownerName){
-        // 1. ê³„ì¢Œë²ˆí˜¸ ë§Œë“œëŠ” ë¡œì§
+        // 1. °èÁÂ¹øÈ£ ¸¸µå´Â ·ÎÁ÷
         String accountNum = createAccountNum();
 
         accountRepository.registerAccount(ownerName, accountNum);
     }
 
+    static int counter = 1;
     private String createAccountNum(){
-        /* ê³„ì¢Œë²ˆí˜¸ ìƒì„± ë¡œì§ = ì •ê·œ í‘œí˜„ì‹ */
-        return "";
+        /* °èÁÂ¹øÈ£ »ı¼º ·ÎÁ÷ = Á¤±Ô Ç¥Çö½Ä */
+        Random random = new Random();
+        int createNum = 0;
+        String ranNum = "";
+        String randomNum = "";
+        for (int i=0; i<5; i++) {
+            createNum = random.nextInt(9);
+            ranNum = Integer.toString(createNum);
+            randomNum += ranNum;
+        }
+        String onlyBankNum = "8016";
+        String countAccountNum = String.format("%04d",counter);
+
+        counter++;
+        String accountNum = onlyBankNum+"-"+countAccountNum+"-"+randomNum;
+        return accountNum;
     }
 
 
-    // ( ìš”êµ¬ì‚¬í•­ 2 ) ì€í–‰ì€ ê³„ì¢Œë¥¼ ê´€ë¦¬(ìˆ˜ì •/ì‚­ì œ)í•œë‹¤.
+    // ( ¿ä±¸»çÇ× 2 ) ÀºÇàÀº °èÁÂ¸¦ °ü¸®(¼öÁ¤/»èÁ¦)ÇÑ´Ù.
 
-    // ê³„ì¢Œë¥¼ ìˆ˜ì •í•˜ëŠ” ê²½ìš° ( Accountì˜ êµ¬ì„± ìš”ì†Œ = ì‚¬ìš©ì ì´ë¦„ / ê³„ì¢Œë²ˆí˜¸ / ì”ì•¡ )
+    // °èÁÂ¸¦ ¼öÁ¤ÇÏ´Â °æ¿ì ( AccountÀÇ ±¸¼º ¿ä¼Ò = »ç¿ëÀÚ ÀÌ¸§ / °èÁÂ¹øÈ£ / ÀÜ¾× )
 
-    // ì…ê¸ˆ, ì¶œê¸ˆí•˜ëŠ” ê¸°ëŠ¥.
+    // ÀÔ±İ, Ãâ±İÇÏ´Â ±â´É.sd
 
-    // ê³„ì¢Œë¥¼ ì‚­ì œí•˜ëŠ” ê²½ìš°
-
-
-
-    // ( ìš”êµ¬ì‚¬í•­ 3 ) ì€í–‰ì€ ê³„ì¢Œë²ˆí˜¸ë¡œ ê³„ì¢Œë¥¼ ì°¾ì„ ìˆ˜ ìˆë‹¤.
-    public Account findAccountByAccountNum(String accountNum){
-        return accountRepository.findAccountByAccountNum(accountNum);
-    }
-
-    // ( ìš”êµ¬ì‚¬í•­ 4 ) ì€í–‰ì€ ê³„ì¢Œì˜ ì†Œìœ ì ëª…ìœ¼ë¡œ ê³„ì¢Œë¥¼ ì°¾ì„ ìˆ˜ ìˆë‹¤.
-    public ArrayList<Account> findAccountByOwnerName(String ownerName){
-        return accountRepository.findAccountByOwnerName(ownerName);
-    }
-
-    // ( ìš”êµ¬ì‚¬í•­ 5 ) ì€í–‰ì€ ëª¨ë“  ê³„ì¢Œì˜ ëª©ë¡ì„ ì¡°íšŒ í•  ìˆ˜ ìˆë‹¤.
-    public ArrayList<Account> findAllAccounts(){
-        return accountRepository.findAllAccounts();
-    }
-
+    // °èÁÂ¸¦ »èÁ¦ÇÏ´Â °æ¿ì
 
 
 }

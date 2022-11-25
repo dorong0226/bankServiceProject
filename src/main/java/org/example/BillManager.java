@@ -8,7 +8,7 @@ public class BillManager {
 
     public void getAllBills(String accountNum) {
         for ( Bill bill : bills ) {
-            System.out.println(/* ë‚´ìš© ì¶œë ¥ ë¡œì§ */);
+            System.out.println(/* ³»¿ë Ãâ·Â ·ÎÁ÷ */);
         }
     }
 

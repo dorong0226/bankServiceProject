@@ -19,6 +19,8 @@ public class Bank {
         accountRepository.registerAccount(ownerName, accountNum);
     }
 
+
+    //계좌번호 생성시 앞자리 4자리 은행 고유값 + 중간 4자리는 일정하게 증가 +뒷5자리는 난수로 구성
     static int counter = 1;
     private String createAccountNum(){
         /* 계좌번호 생성 로직 = 정규 표현식 */

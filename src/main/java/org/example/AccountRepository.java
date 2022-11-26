@@ -23,7 +23,7 @@ public class AccountRepository {
         int check_count = 0;
         if (accounts.size() != 0) {
             for (Account account : accounts) {
-                if (ownerName == account.getOwnerName()) ;
+                if (ownerName.equals(account.getOwnerName())) ;
                 accounts.remove(account);
                 check_count += 1;
                 break;
@@ -91,7 +91,8 @@ public class AccountRepository {
         }
     }
 
-    //고객은 자신의 계좌만 조회 가능 but 정규 표현식이 필요 +마스킹 처리까지함
+    //고객이 조회할때 : 고객은 자신의 계좌만 조회 가능 but 정규 표현식이 필요 +마스킹 처리
+    //split 으로 "-" 제거후 LinkedString [0,1,2]에 삼등분해서 담아놓고 2번 인덱스만 마스킹처리 후 인덱스 0 + 1+ 2 하는방식
     public void customerFindAccount(String customerName) {
         for (Account account : accounts) {
             if (customerName.equals(account)) {
@@ -103,6 +104,7 @@ public class AccountRepository {
             }
         }
     }
+    //고객조회시 마스킹 처리 로직
     public String accountNoMasking(String accountNo){
         // 계좌번호는 숫자만 파악하므로
         String regex = "(^[0-9]+)$";
@@ -110,7 +112,7 @@ public class AccountRepository {
         Matcher matcher = Pattern.compile(regex).matcher(accountNo);
         if(matcher.find()) {
             int length = accountNo.length();
-            if(length > 5) {
+            if(length >= 5) {
                 char[] c = new char[5];
                 Arrays.fill(c, '*');
 

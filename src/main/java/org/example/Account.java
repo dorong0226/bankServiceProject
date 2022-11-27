@@ -4,17 +4,19 @@ public class Account {
 
     /* Field */
 
-    private String ownerName; // ì†Œìœ ì ëª… ( unique key )
+    private String ownerName;
 
-    private String accountNum; // ê³„ì¢Œë²ˆí˜¸
+    private String accountNum; // °èÁÂ¹øÈ£
 
-    private int balance; //ì”ê³ 
+    private int balance; //ÀÜ°í
 
 
     /* Method */
 
     // Construtor
-    Account(String ownerName, String accountNum){} // balance = 0 ìœ¼ë¡œ ê³ ì •í•´ë²„ë¦¬ê¸°.
+    Account(String ownerName, String accountNum){
+
+    } // balance = 0 À¸·Î °íÁ¤ÇØ¹ö¸®±â.
 
 
     // Getter
@@ -28,45 +30,45 @@ public class Account {
     }
 
 
-    // ( ìš”êµ¬ì‚¬í•­ 8 ) ê³„ì¢ŒëŠ” ì”ê³  í™•ì¸ ê¸°ëŠ¥ì´ ìˆë‹¤.
+    // ( ¿ä±¸»çÇ× 8 ) °èÁÂ´Â ÀÜ°í È®ÀÎ ±â´ÉÀÌ ÀÖ´Ù.
     public int getBalance() {
-        // Bankê°€ í˜¸ì¶œì€ í•¨. -> Bankê°€ AccountRepository í•œí…Œ,
-        // accountNumì„ ë„˜ê²¨ ì¤Œ.
-        //	-> AccountRepositoryê°€ ê°€ì§€ê³  ìˆëŠ” ê³„ì¢Œ ëŒë ¤ë´ì„œ, ë§ìœ¼ë©´. ê·¸ Accountë¥¼ ì°¾ì•„ì„œ
-        // getBalance(). ë¥¼ ì¨ì„œ, ì”ê³ ë¥¼ ê°€ì ¸ì˜¨ë‹¤.
+        // Bank°¡ È£ÃâÀº ÇÔ. -> Bank°¡ AccountRepository ÇÑÅ×,
+        // accountNumÀ» ³Ñ°Ü ÁÜ.
+        //	-> AccountRepository°¡ °¡Áö°í ÀÖ´Â °èÁÂ µ¹·ÁºÁ¼­, ¸ÂÀ¸¸é. ±× Account¸¦ Ã£¾Æ¼­
+        // getBalance(). ¸¦ ½á¼­, ÀÜ°í¸¦ °¡Á®¿Â´Ù.
         return this.balance;
     }
 
 
-    // ( ìš”êµ¬ì‚¬í•­ 7-1 ) ê³„ì¢ŒëŠ” ì…ê¸ˆ ê¸°ëŠ¥ì´ ìˆë‹¤.
+    // ( ¿ä±¸»çÇ× 7-1 ) °èÁÂ´Â ÀÔ±İ ±â´ÉÀÌ ÀÖ´Ù.
     public void deposit(int amount) {
+
         this.balance += amount;
 
-        Bill bill = new Bill(/* required params */));
-        recordBill(bill);
+
     }
 
 
-    // ( ìš”êµ¬ì‚¬í•­ 7-2 ) ê³„ì¢ŒëŠ” ì¶œê¸ˆ ê¸°ëŠ¥ì´ ìˆë‹¤.
+    // ( ¿ä±¸»çÇ× 7-2 ) °èÁÂ´Â Ãâ±İ ±â´ÉÀÌ ÀÖ´Ù.
     public void withdraw(int amount) {
-        // ë§Œì•½, ì¶œê¸ˆí•  ê¸ˆì•¡ > ê³„ì¢Œì˜ í˜„ì¬ ê¸ˆì•¡ ì¸ ê²½ìš° ì˜ˆì™¸ì²˜ë¦¬
-        // ê·¸ì— ë§ëŠ” ë¡œì§
+        // ¸¸¾à, Ãâ±İÇÒ ±İ¾× > °èÁÂÀÇ ÇöÀç ±İ¾× ÀÎ °æ¿ì ¿¹¿ÜÃ³¸®
+        // ±×¿¡ ¸Â´Â ·ÎÁ÷
 
         this.balance -= amount;
 
-        Bill bill = new Bill(/* required params */);
-        recordBill(bill);
+
+
     }
 
 
-    // ( ìš”êµ¬ì‚¬í•­ 9 ) ê³„ì¢Œì—ì„œ ì”ê³ ì˜ ë³€í™”ê°€ ìˆì„ ë•Œë§ˆë‹¤ ê±°ë˜ ë‚´ì—­ì— ê¸°ë¡ëœë‹¤.
+    // ( ¿ä±¸»çÇ× 9 ) °èÁÂ¿¡¼­ ÀÜ°íÀÇ º¯È­°¡ ÀÖÀ» ¶§¸¶´Ù °Å·¡ ³»¿ª¿¡ ±â·ÏµÈ´Ù.
     public void recordBill(Bill bill) {
         BillManager billManager = new BillManager();
         billManager.recordBill(bill);
     }
 
 
-    // ( ìš”êµ¬ì‚¬í•­ 11 ) ê³„ì¢ŒëŠ” ëª¨ë“  ê±°ë˜ ë‚´ì—­ì„ ì¡°íšŒí•  ìˆ˜ ìˆë‹¤.
+    // ( ¿ä±¸»çÇ× 11 ) °èÁÂ´Â ¸ğµç °Å·¡ ³»¿ªÀ» Á¶È¸ÇÒ ¼ö ÀÖ´Ù.
     public void getAllBills( String accountNum ){
         BillManager billManager = new BillManager();
         billManager.getAllBills(accountNum);

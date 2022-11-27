@@ -1,54 +1,125 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class AccountRepository{
+public class AccountRepository {
 
-    // ê³„ì¢Œë¥¼ ë‹¤ ê°€ì§€ê³  ìˆìŒ.
+    // °èÁÂ¸¦ ´Ù °¡Áö°í ÀÖÀ½.
     static ArrayList<Account> accounts = new ArrayList<>();
 
-    // (ìš”êµ¬ì‚¬í•­ 1) ì€í–‰ì€ ê³„ì¢Œë¥¼ ë“±ë¡í•œë‹¤ ( ë‹¨, ê³„ì¢Œë²ˆí˜¸ëŠ” ì •ê·œ í‘œí˜„ì‹ìœ¼ë¡œ ì œí•œ )
-    public void registerAccount(String ownerName, String accountNum){
-        // ê³„ì¢Œ ìƒì„±
+    // (¿ä±¸»çÇ× 1) ÀºÇàÀº °èÁÂ¸¦ µî·ÏÇÑ´Ù ( ´Ü, °èÁÂ¹øÈ£´Â Á¤±Ô Ç¥Çö½ÄÀ¸·Î Á¦ÇÑ )
+    public void registerAccount(String ownerName, String accountNum) {
+        // °èÁÂ »ı¼º
         Account account = new Account(ownerName, accountNum);
 
-        // ê³„ì¢Œë¥¼ account arraylistì— ì €ì¥í•œë‹¤.
+        // °èÁÂ¸¦ account arraylist¿¡ ÀúÀåÇÑ´Ù.
         accounts.add(account);
     }
 
-    // ( ìš”êµ¬ì‚¬í•­ 2 )
-
-    // ( ìš”êµ¬ì‚¬í•­ 3 ) ì€í–‰ì€ ê³„ì¢Œë²ˆí˜¸ë¡œ ê³„ì¢Œë¥¼ ì°¾ì„ ìˆ˜ ìˆë‹¤.
-    public Account findAccountByAccountNum(String accountNum){
-
-        for( Account account : accounts ){
-            if( accountNum.equals(account.getAccountNum()))
-                return account;
+    public void removeAccount(String ownerName) {
+        int check_count = 0;
+        if (accounts.size() != 0) {
+            for (Account account : accounts) {
+                if (ownerName.equals(account.getOwnerName())) ;
+                accounts.remove(account);
+                check_count += 1;
+                break;
+            }
+            if (check_count == 0) {
+                System.out.println("µî·ÏµÈ °èÁÂ°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+            }
+        } else {
+            System.out.println("µî·ÏµÈ °èÁÂ°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
         }
-        // ì—†ìœ¼ë©´
-        return null;
     }
 
-    // ( ìš”êµ¬ì‚¬í•­ 4 ) ì€í–‰ì€ ê³„ì¢Œì˜ ì†Œìœ ì ëª…ìœ¼ë¡œ ê³„ì¢Œë¥¼ ì°¾ì„ ìˆ˜ ìˆë‹¤.
-    public ArrayList<Account> findAccountByOwnerName(String ownerName) {
-
-        ArrayList<Account> foundAccountsByOwnerName = new ArrayList<>();
-
-        for ( Account account : accounts ) {
-            if ( ownerName.equals(account.getOwnerName()) )
-                foundAccountsByOwnerName.add(account);
+    // ( ¿ä±¸»çÇ× 3 ) ÀºÇàÀº °èÁÂ¹øÈ£·Î °èÁÂ¸¦ Ã£À» ¼ö ÀÖ´Ù.
+    public void findAccountByAccountNum(String accountNum) {
+        int check_count = 0;
+        if (accounts.size() != 0) {
+            for (Account account : accounts) {
+                if (accountNum.equals(account.getAccountNum())) {
+                    check_count += 1;
+                    System.out.println("ÀÌ¸§ : " + account.getOwnerName()
+                            + "\n °èÁÂ¹øÈ£ : " + account.getAccountNum()
+                            + "\n ÀÜ ¾×" + account.getBalance());
+                }
+            }
+            if (check_count == 0) {
+                System.out.println("µî·ÏµÈ °èÁÂ°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+            }
+        } else {
+            System.out.println("µî·ÏµÈ °èÁÂ°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
         }
+    }
 
-        if( foundAccountsByOwnerName.size() == 0 ) // ë¹„ì–´ìˆë‹¤ë©´
-            return null;
-        else // ìˆë‹¤ë©´
-            return foundAccountsByOwnerName;
+    // ( ¿ä±¸»çÇ× 4 ) ÀºÇàÀº °èÁÂÀÇ ¼ÒÀ¯ÀÚ ¸íÀ¸·Î °èÁÂ¸¦ Ã£À» ¼ö ÀÖ´Ù.
+    public void findAccountByOwnerName(String ownerName) {
+        int check_count = 0;
+        if (accounts.size() != 0) {
+            for (Account account : accounts) {
+                check_count += 1;
+                if (ownerName.equals(account.getOwnerName()))
+                    System.out.println("ÀÌ¸§ : " + account.getOwnerName()
+                            + "\n °èÁÂ¹øÈ£ : " + account.getAccountNum()
+                            + "\n ÀÜ ¾×" + account.getBalance()
+                            + "---------------------------------------------");
+            }
+            if (check_count == 0) {
+                System.out.println("µî·ÏµÈ °èÁÂ°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+            }
+        } else {
+            System.out.println("µî·ÏµÈ °èÁÂ°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+        }
     }
 
 
-    // ( ìš”êµ¬ì‚¬í•­ 5 ) ì€í–‰ì€ ëª¨ë“  ê³„ì¢Œì˜ ëª©ë¡ì„ ì¡°íšŒí•  ìˆ˜ ìˆë‹¤.
-    public ArrayList<Account> findAllAccounts(){
-        return accounts;
+    // ( ¿ä±¸»çÇ× 5 ) ÀºÇàÀº ¸ğµç °èÁÂÀÇ ¸ñ·ÏÀ» Á¶È¸ÇÒ ¼ö ÀÖ´Ù.
+    public void findAllAccounts() {
+        if (accounts.size() != 0) {
+            for (Account account : AccountRepository.accounts) {
+                System.out.println("ÀÌ¸§ : " + account.getOwnerName()
+                        + "\n °èÁÂ¹øÈ£ : " + account.getAccountNum()
+                        + "\n ÀÜ ¾×" + account.getBalance()
+                        + "---------------------------------------------");  //ÀÜ¾×À» Ç¥½ÃÇØ¾ßÇÏ´ÂÁö´Â ÀÇ¹®
+            }
+        } else {
+            System.out.println("µî·ÏµÈ °èÁÂ°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+        }
     }
 
+    //°í°´ÀÌ Á¶È¸ÇÒ¶§ : °í°´Àº ÀÚ½ÅÀÇ °èÁÂ¸¸ Á¶È¸ °¡´É but Á¤±Ô Ç¥Çö½ÄÀÌ ÇÊ¿ä +¸¶½ºÅ· Ã³¸®
+    //split À¸·Î "-" Á¦°ÅÈÄ LinkedString [0,1,2]¿¡ »ïµîºĞÇØ¼­ ´ã¾Æ³õ°í 2¹ø ÀÎµ¦½º¸¸ ¸¶½ºÅ·Ã³¸® ÈÄ ÀÎµ¦½º 0 + 1+ 2 ÇÏ´Â¹æ½Ä
+    public void customerFindAccount(String customerName) {
+        for (Account account : accounts) {
+            if (customerName.equals(account)) {
+                String[] linkedString = account.getAccountNum().split("-");
+                System.out.println("ÀÌ¸§ : " + account.getOwnerName()
+                            + "\n °èÁÂ¹øÈ£ : " + linkedString[0]+"-"+linkedString[1]+accountNoMasking(linkedString[2])
+                            + "\n ÀÜ ¾×" + account.getBalance()
+                            + "---------------------------------------------");
+            }
+        }
+    }
+    //°í°´Á¶È¸½Ã ¸¶½ºÅ· Ã³¸® ·ÎÁ÷
+    public String accountNoMasking(String accountNo){
+        // °èÁÂ¹øÈ£´Â ¼ıÀÚ¸¸ ÆÄ¾ÇÇÏ¹Ç·Î
+        String regex = "(^[0-9]+)$";
+
+        Matcher matcher = Pattern.compile(regex).matcher(accountNo);
+        if(matcher.find()) {
+            int length = accountNo.length();
+            if(length >= 5) {
+                char[] c = new char[5];
+                Arrays.fill(c, '*');
+
+                return accountNo.replace(accountNo, accountNo.substring(0, length-5) + String.valueOf(c));
+            }
+        }
+        return accountNo;
+    }
 }
+

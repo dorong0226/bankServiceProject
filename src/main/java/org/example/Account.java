@@ -1,76 +1,70 @@
-package org.example;
+import BillManager;
+import Bill;
+
+import java.util.Scanner;
 
 public class Account {
 
-    /* Field */
+	private String ownerName;
+	private String accountNum;
+	private int balance;
 
-    private String ownerName;
-
-    private String accountNum; // °èÁÂ¹øÈ£
-
-    private int balance; //ÀÜ°í
-
-
-    /* Method */
-
-    // Construtor
-    Account(String ownerName, String accountNum){
-
-    } // balance = 0 À¸·Î °íÁ¤ÇØ¹ö¸®±â.
-
-
-    // Getter
-
-    public String getOwnerName(){
-        return this.ownerName;
-    }
-
-    public String getAccountNum(){
-        return this.accountNum;
-    }
-
-
-    // ( ¿ä±¸»çÇ× 8 ) °èÁÂ´Â ÀÜ°í È®ÀÎ ±â´ÉÀÌ ÀÖ´Ù.
-    public int getBalance() {
-        // Bank°¡ È£ÃâÀº ÇÔ. -> Bank°¡ AccountRepository ÇÑÅ×,
-        // accountNumÀ» ³Ñ°Ü ÁÜ.
-        //	-> AccountRepository°¡ °¡Áö°í ÀÖ´Â °èÁÂ µ¹·ÁºÁ¼­, ¸ÂÀ¸¸é. ±× Account¸¦ Ã£¾Æ¼­
-        // getBalance(). ¸¦ ½á¼­, ÀÜ°í¸¦ °¡Á®¿Â´Ù.
-        return this.balance;
-    }
-
-
-    // ( ¿ä±¸»çÇ× 7-1 ) °èÁÂ´Â ÀÔ±İ ±â´ÉÀÌ ÀÖ´Ù.
-    public void deposit(int amount) {
-
-        this.balance += amount;
-
-
-    }
-
-
-    // ( ¿ä±¸»çÇ× 7-2 ) °èÁÂ´Â Ãâ±İ ±â´ÉÀÌ ÀÖ´Ù.
-    public void withdraw(int amount) {
-        // ¸¸¾à, Ãâ±İÇÒ ±İ¾× > °èÁÂÀÇ ÇöÀç ±İ¾× ÀÎ °æ¿ì ¿¹¿ÜÃ³¸®
-        // ±×¿¡ ¸Â´Â ·ÎÁ÷
-
-        this.balance -= amount;
-
-
-
-    }
-
-
-    // ( ¿ä±¸»çÇ× 9 ) °èÁÂ¿¡¼­ ÀÜ°íÀÇ º¯È­°¡ ÀÖÀ» ¶§¸¶´Ù °Å·¡ ³»¿ª¿¡ ±â·ÏµÈ´Ù.
-    public void recordBill(Bill bill) {
-        BillManager billManager = new BillManager();
-        billManager.recordBill(bill);
-    }
-
-
-    // ( ¿ä±¸»çÇ× 11 ) °èÁÂ´Â ¸ğµç °Å·¡ ³»¿ªÀ» Á¶È¸ÇÒ ¼ö ÀÖ´Ù.
-    public void getAllBills( String accountNum ){
-        BillManager billManager = new BillManager();
-        billManager.getAllBills(accountNum);
-    }
+	
+	// ( ìš”êµ¬ì‚¬í•­ 7-1 ) ê³„ì¢ŒëŠ” ì…ê¸°ëŠ¥ì´ ìˆë‹¤.
+	public void deposit (int amount) { 
+		
+		System.out.println("ì…ê¸ˆí•  ê¸ˆì•¡ì„ ì…ë ¥í•˜ì„¸ìš”.");
+		int amount = scanner.nextInt();
+		this.balance += amount;
+		System.out.println("ì…ê¸ˆì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.");
+		
+		Bill bill = new Bill();
+		Bill.recordBill(bill);	
+		
+			// ( ìš”êµ¬ì‚¬í•­ 9 ) ê³„ì¢Œì—ì„œ ì”ê³ ì˜ ë³€í™”ê°€ ìˆì„ ë•Œë§ˆë‹¤ ê±°ë˜ ë‚´ì—­ì— ê¸°ë¡ëœë‹¤.
+		BillManager billManager = new BillManager(); 
+		billManager.recordBill(bill);
+		
+	// ( ìš”êµ¬ì‚¬í•­ 7-2 ) ê³„ì¢ŒëŠ” ì¶œê¸ˆ ê¸°ëŠ¥ì´ ìˆë‹¤.
+	public void withdraw (int amount) {
+		
+		System.out.println("ì¶œê¸ˆí•  ê¸ˆì•¡ì„ ì…ë ¥í•˜ì„¸ìš”.");
+		int amount = scanner.nextInt();
+		
+		if (amount <= balance) {
+			this.balance -= amount;
+			
+			// ( ìš”êµ¬ì‚¬í•­ 9 ) ê³„ì¢Œì—ì„œ ì”ê³ ì˜ ë³€í™”ê°€ ìˆì„ ë•Œë§ˆë‹¤ ê±°ë˜ ë‚´ì—­ì— ê¸°ë¡ëœë‹¤.
+			BillManager billManager = new BillManager();
+			billManager.recordBill(bill);}
+		else {
+		System.out.println("ê³„ì¢Œì˜ ì”ê³ ê°€ ë¶€ì¡±í•©ë‹ˆë‹¤.");
+		} break;
+		}
+	
+	// ( ìš”êµ¬ì‚¬í•­ 11 ) ê³„ì¢ŒëŠ” ëª¨ë“  ê±°ë˜ ë‚´ì—­ì„ ì¡°íšŒí•  ìˆ˜ ìˆë‹¤. 	
+	public void getAllBills(accountNum) {
+		BillManager billManager = new BillManager();
+		billManager.getAllBills(accountNum);
+	}
+	
+	
+	}
+	
+	// Getter
+	public String getOwnerName() {
+		return this.ownerName;
+	}
+	
+	public String getAccountNum() {
+		return this.accountNum;
+	}
+	public int getbalance() {
+		return this.balance;
+	}
+	
+	
+	
 }
+
+
